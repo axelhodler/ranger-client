@@ -15,10 +15,11 @@
 
   <script type="text/x-handlebars" id="medias">
     <h1>Medias</h1>
+    {{#rangeGfx}}{{/rangeGfx}}
     <ul>
-    {{#each item in model}}
+      {{#each item in model}}
       <li>{{ item.id }}: {{ item.url }}</li>
-    {{/each}}
+      {{/each}}
     </ul>
   </script>
 
@@ -26,6 +27,7 @@
   <script src="js/libs/handlebars-1.1.2.js"></script>
   <script src="js/libs/ember-1.5.1.js"></script>
   <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/raphael-min.js"></script>
   <script src="js/app.js"></script>
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <script src="tests/runner.js"></script>
