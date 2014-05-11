@@ -15,10 +15,10 @@
 
   <script type="text/x-handlebars" id="medias">
     <h1>Medias</h1>
-    {{#rangeGfx}}{{/rangeGfx}}
     <ul>
       {{#each item in model}}
-      <li>{{ item.id }}: {{ item.url }} {{ item.avgStartTime }} - {{ item.avgEndTime }}</li>
+      <li>{{ item.id }}: {{ item.url }}</li>
+      {{ draw_range item }}
       {{/each}}
     </ul>
   </script>
