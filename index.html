@@ -18,7 +18,7 @@
     {{#rangeGfx}}{{/rangeGfx}}
     <ul>
       {{#each item in model}}
-      <li>{{ item.id }}: {{ item.url }}</li>
+      <li>{{ item.id }}: {{ item.url }} {{ item.avgStartTime }} - {{ item.avgEndTime }}</li>
       {{/each}}
     </ul>
   </script>

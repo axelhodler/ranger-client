@@ -13,12 +13,24 @@ App.MediasRoute = Ember.Route.extend({
 });
 
 App.Medias = DS.Model.extend({
-  url: DS.attr( 'string' )
+  url: DS.attr('string'),
+  avgStartTime: DS.attr('number'),
+  avgEndTime: DS.attr('number')
 });
 
 App.Medias.FIXTURES = [
-  { id: 1, url: 'www.google.com'},
-  { id: 2, url: 'www.yahoo.com'}
+  {
+    id: 1,
+    url: 'www.google.com',
+    avgStartTime: 50,
+    avgEndTime: 100
+  },
+  {
+    id: 2,
+    url: 'www.yahoo.com',
+    avgStartTime: 100,
+    avgEndTime: 200
+  }
 ];
 
 Handlebars.registerHelper('rangeGfx', function() {
