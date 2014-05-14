@@ -9,18 +9,21 @@
 <body>
   <script type="text/x-handlebars">
     <h2>Welcome to Ember.js</h2>
-
     {{outlet}}
   </script>
 
   <script type="text/x-handlebars" id="medias">
     <h1>Medias</h1>
     <ul>
-      {{#each item in model}}
-      <li>{{ item.id }}: {{ item.url }}</li>
-      {{ draw_range item }}
+      {{#each model}}
+      <li>{{#link-to 'media' this}}{{ id }}{{/link-to}}</li>
       {{/each}}
     </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="media">
+    <h3>{{ url }}</h3>
+    {{ draw_range this }}
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>

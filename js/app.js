@@ -2,6 +2,7 @@ var App = Ember.Application.create();
 
 App.Router.map(function() {
   this.resource('medias', { path: '/' });
+  this.resource('media', { path: ':media_id' });
 });
 
 App.ApplicationAdapter = DS.FixtureAdapter;
@@ -9,6 +10,12 @@ App.ApplicationAdapter = DS.FixtureAdapter;
 App.MediasRoute = Ember.Route.extend({
   model: function() {
     return this.store.find('medias');
+  }
+});
+
+App.MediaRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('medias', params.media_id);
   }
 });
 
@@ -24,12 +31,12 @@ App.Medias.FIXTURES = [
     url: 'www.google.com',
     avgStartTime: 50,
     avgEndTime: 300
-  // },
-  // {
-  //   id: 2,
-  //   url: 'www.yahoo.com',
-  //   avgStartTime: 100,
-  //   avgEndTime: 200
+  },
+  {
+    id: 2,
+    url: 'www.yahoo.com',
+    avgStartTime: 70,
+    avgEndTime: 120
   }
 ];
 
