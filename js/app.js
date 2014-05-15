@@ -29,14 +29,14 @@ App.Medias.FIXTURES = [
   {
     id: 1,
     url: 'www.google.com',
-    avgStartTime: 50,
-    avgEndTime: 300
+    avgStartTime: 50.5,
+    avgEndTime: 300.3
   },
   {
     id: 2,
     url: 'www.yahoo.com',
-    avgStartTime: 70,
-    avgEndTime: 120
+    avgStartTime: 70.5,
+    avgEndTime: 120.7
   }
 ];
 
@@ -53,4 +53,25 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
 
   var endTime = paper.rect(currentMedia.get('avgEndTime'), 0, 5, 50, 2);
   endTime.attr("fill", "#f00");
+});
+
+Ember.Handlebars.helper('format_time', function(time) {
+  var rounded = Math.round(time);
+  var min = 0;
+  var secs = 0;
+
+  while (rounded > 59) {
+    rounded -= 60;
+    min++;
+  }
+
+  if (rounded < 10) {
+    secs = '0' + rounded;
+  } else {
+    secs = rounded;
+  }
+
+  var formatted = min + ':' + secs;
+
+  return formatted;
 });
