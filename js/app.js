@@ -53,6 +53,15 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
 
   var endTime = paper.rect(currentMedia.get('avgEndTime'), 0, 5, 50, 2);
   endTime.attr("fill", "#f00");
+
+  var startText = paper.text(currentMedia.get('avgStartTime'), 50 + 10, "Start");
+  var endText = paper.text(currentMedia.get('avgEndTime'), 50 + 10, "End");
+
+  var css = { "font-weight": "bold", "font-size": 16,
+              "font-family": "Arial, Helvetica, sans-serif" };
+  startText.attr(css);
+  endText.attr(css);
+
 });
 
 Ember.Handlebars.helper('format_time', function(time) {
