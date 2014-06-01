@@ -18,15 +18,18 @@
         {{#each model}}
           <li>{{#link-to 'media' this}}{{ id }}{{/link-to}}</li>
         {{/each}}
+        {{outlet}}
       </ul>
     </script>
 
     <script type="text/x-handlebars" id="media">
-      <h2> mediaasdf </h2>
-      <!-- <h3>{{ url }}</h3> -->
-      <!-- {{ draw_range this }} -->
-      <!-- avg start {{ format_time avgStartTime }}, -->
-      <!-- avg end {{ format_time avgEndTime }} -->
+      <h2>Media</h2>
+      <ul>
+        <li>{{ url }}</li>
+        <li>{{ avgStartTime }}</li>
+        <li>{{ avgEndTime }}</li>
+        <li>{{ choicesByUsers }}</li>
+      </ul>
     </script>
 
     <script src="js/libs/jquery-1.10.2.js"></script>
