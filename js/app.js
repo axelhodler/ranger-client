@@ -1,9 +1,8 @@
 var App = Ember.Application.create();
 
 App.Router.map(function() {
-  this.resource('medias', function() {
-    this.resource('media', { path: ':media_id' });
-  });
+  this.resource('medias', { path: '/' });
+  this.resource('media', { path: ':media_id' });
 });
 
 App.IndexRoute = Ember.Route.extend({
