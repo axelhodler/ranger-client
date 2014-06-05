@@ -60,6 +60,7 @@
     </script>
 
     <script type="text/x-handlebars" id="medias">
+      {{ clear_range }}
       <h1>Medias</h1>
       <ul>
         {{#each model}}
@@ -76,7 +77,10 @@
         <li>{{ avgEndTime }}</li>
         <li>{{ choicesByUsers }}</li>
       </ul>
+      {{ draw_range this }}
     </script>
+
+    <div class="container" id="range_diagram"></div>
 
     <script src="js/libs/jquery-1.10.2.js"></script>
     <script src="js/libs/handlebars-1.1.2.js"></script>

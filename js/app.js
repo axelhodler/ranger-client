@@ -41,8 +41,8 @@ App.ApplicationSerializer = DS.RESTSerializer.extend({
 });
 
 Ember.Handlebars.helper('draw_range', function(currentMedia) {
-  // canvas at 50, 200  600*200
-  var paper = Raphael(50, 200, 600, 200);
+  $('#range_diagram').css({"heigth":"50px"});
+  var paper = Raphael("range_diagram");
 
   // regular rectangle x,y,width,height,corner-rounded
   var mainPart = paper.rect(0, 0, 500, 50, 10);
@@ -61,7 +61,10 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
               "font-family": "Arial, Helvetica, sans-serif" };
   startText.attr(css);
   endText.attr(css);
+});
 
+Ember.Handlebars.helper('clear_range', function() {
+  $('#range_diagram').html("").css({"height":"0px"});
 });
 
 Ember.Handlebars.helper('format_time', function(time) {
