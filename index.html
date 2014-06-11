@@ -73,8 +73,8 @@
       <h1>Media</h1>
       <ul>
         <li>{{ url }}</li>
-        <li>{{ avgStartTime }}</li>
-        <li>{{ avgEndTime }}</li>
+        <li>{{ format_time avgStartTime }}</li>
+        <li>{{ format_time avgEndTime }}</li>
         <li>{{ choicesByUsers }}</li>
       </ul>
       {{ draw_range this }}

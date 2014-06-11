@@ -50,16 +50,20 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
   var css = { "font-weight": "bold", "font-size": 16,
               "font-family": "Arial, Helvetica, sans-serif" };
 
+  var avgStartTime = currentMedia.get('avgStartTime');
+  var avgEndTime = currentMedia.get('avgEndTime');
+
   // Startstuff
-  var startTime = range_block.rect(currentMedia.get('avgStartTime'), 0, 5, 50, 2);
+  var startTime = range_block.rect(avgStartTime, 0, 5, 50, 2);
   startTime.attr("fill", "#f00");
-  var startText = range_block.text(currentMedia.get('avgStartTime'), 50 + 10, "Start");
+  var startText = range_block.text(avgStartTime, 50 + 10,
+                                  format_time(avgStartTime));
   startText.attr(css);
 
   // Endstuff
-  var endTime = range_block.rect(currentMedia.get('avgEndTime'), 0, 5, 50, 2);
+  var endTime = range_block.rect(avgEndTime, 0, 5, 50, 2);
   endTime.attr("fill", "#f00");
-  var endText = range_block.text(currentMedia.get('avgEndTime'), 50 + 10, "End");
+  var endText = range_block.text(avgEndTime, 50 + 10, format_time(avgEndTime));
   endText.attr(css);
 
   // startGroup draggin
@@ -74,6 +78,10 @@ Ember.Handlebars.helper('clear_range', function() {
 });
 
 Ember.Handlebars.helper('format_time', function(time) {
+  return format_time(time);
+});
+
+function format_time(time) {
   var rounded = Math.round(time);
   var min = 0;
   var secs = 0;
@@ -106,7 +114,7 @@ function setDragging(rangeBlock, timeMarker, timeText) {
   var onMove = function (dx, dy) {
     var myset = this.data("myset");
     myset.transform(this.data("mytrans")+'T'+dx+','+0);
-    timeText.attr("text", Math.round(myset.getBBox().x));
+    timeText.attr("text", format_time(myset.getBBox().x));
   }
 
   var onEnd = function () {
