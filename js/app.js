@@ -100,7 +100,7 @@ function format_time(time) {
   var formatted = min + ':' + secs;
 
   return formatted;
-});
+};
 
 function setDragging(rangeBlock, timeMarker, timeText) {
   var group = rangeBlock.set(timeMarker, timeText);
@@ -123,4 +123,4 @@ function setDragging(rangeBlock, timeMarker, timeText) {
   }
 
   group.drag(onMove, onStart, onEnd);
-}
+};
