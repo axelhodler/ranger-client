@@ -44,22 +44,26 @@ Ember.Handlebars.helper('format_time', function(time) {
 });
 
 function format_time(time) {
-  var rounded = Math.round(time);
-  var min = 0;
-  var secs = 0;
+  var seconds = Math.round(time);
 
-  while (rounded > 59) {
-    rounded -= 60;
-    min++;
+  var formatted_time = {
+    minutes: 0,
+    remaining_seconds: 0
+  };
+
+  while (seconds > 59) {
+    seconds -= 60;
+    formatted_time.minutes++;
   }
 
-  if (rounded < 10) {
-    secs = '0' + rounded;
+  if (seconds < 10) {
+    formatted_time.remaining_seconds = '0' + seconds;
   } else {
-    secs = rounded;
+    formatted_time.remaining_seconds = seconds;
   }
 
-  var formatted = min + ':' + secs;
+  var formatted = formatted_time.minutes + ':'
+        + formatted_time.remaining_seconds;
 
   return formatted;
 };
