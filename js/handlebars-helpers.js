@@ -11,6 +11,10 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
   var avgStartTime = currentMedia.get('avgStartTime');
   var avgEndTime = currentMedia.get('avgEndTime');
 
+  var range_rect = range_block.rect(avgStartTime, 0, avgEndTime - avgStartTime,
+                                    50, 0);
+  range_rect.attr("fill","#00f");
+
   // Startstuff
   var startTime = range_block.rect(avgStartTime, 0, 5, 50, 2);
   startTime.attr("fill", "#f00");
@@ -25,10 +29,10 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
   endText.attr(css);
 
   // startGroup draggin
-  setDragging(range_block, startTime, startText);
+  setStartDragging(range_block, startTime, startText, range_rect);
 
   // endGroup dragging
-  setDragging(range_block, endTime, endText);
+  setEndDragging(range_block, endTime, endText, range_rect);
 });
 
 Ember.Handlebars.helper('clear_range', function() {
@@ -60,7 +64,7 @@ function format_time(time) {
   return formatted;
 };
 
-function setDragging(rangeBlock, timeMarker, timeText) {
+function setStartDragging(rangeBlock, timeMarker, timeText, range_rect) {
   var group = rangeBlock.set(timeMarker, timeText);
   group.data("myset", group);
 
@@ -73,6 +77,36 @@ function setDragging(rangeBlock, timeMarker, timeText) {
     var myset = this.data("myset");
     myset.transform(this.data("mytrans")+'T'+dx+','+0);
     timeText.attr("text", format_time(myset.getBBox().x));
+    var mid_marker = (myset.getBBox().x + myset.getBBox().x2) / 2;
+    var right_bound = range_rect.getBBox().x2;
+    range_rect.attr("x", mid_marker);
+    range_rect.attr("width", right_bound - mid_marker);
+  }
+
+  var onEnd = function () {
+    var myset = this.data("myset");
+    myset.data("mytrans", this.transform());
+  }
+
+  group.drag(onMove, onStart, onEnd);
+};
+
+function setEndDragging(rangeBlock, timeMarker, timeText, range_rect) {
+  var group = rangeBlock.set(timeMarker, timeText);
+  group.data("myset", group);
+
+  var onStart = function (currentX, currentY, e) {
+    var myset = this.data("myset");
+    myset.data("mytrans", this.transform());
+  }
+
+  var onMove = function (dx, dy) {
+    var myset = this.data("myset");
+    myset.transform(this.data("mytrans")+'T'+dx+','+0);
+    timeText.attr("text", format_time(myset.getBBox().x));
+    var mid_marker = (myset.getBBox().x + myset.getBBox().x2) / 2;
+    var left_bound = range_rect.getBBox().x;
+    range_rect.attr("width", mid_marker - left_bound);
   }
 
   var onEnd = function () {
