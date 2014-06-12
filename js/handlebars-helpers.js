@@ -43,27 +43,30 @@ Ember.Handlebars.helper('format_time', function(time) {
   return format_time(time);
 });
 
-function format_time(time) {
-  var seconds = Math.round(time);
+function setMinutes(time_to_format) {
+  while (time_to_format.remaining_seconds > 59) {
+    time_to_format.remaining_seconds -= 60;
+    time_to_format.minutes++;
+  }
+}
 
-  var formatted_time = {
+function setRemainingSeconds(time_to_format) {
+  if (time_to_format.remaining_seconds < 10) {
+    time_to_format.remaining_seconds = '0' + time_to_format.remaining_seconds;
+  }
+}
+
+function format_time(time) {
+  var time_to_format = {
     minutes: 0,
-    remaining_seconds: 0
+    remaining_seconds: Math.round(time)
   };
 
-  while (seconds > 59) {
-    seconds -= 60;
-    formatted_time.minutes++;
-  }
+  setMinutes(time_to_format);
+  setRemainingSeconds(time_to_format);
 
-  if (seconds < 10) {
-    formatted_time.remaining_seconds = '0' + seconds;
-  } else {
-    formatted_time.remaining_seconds = seconds;
-  }
-
-  var formatted = formatted_time.minutes + ':'
-        + formatted_time.remaining_seconds;
+  var formatted = time_to_format.minutes + ':'
+        + time_to_format.remaining_seconds;
 
   return formatted;
 };
