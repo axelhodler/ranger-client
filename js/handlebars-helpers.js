@@ -43,19 +43,6 @@ Ember.Handlebars.helper('format_time', function(time) {
   return format_time(time);
 });
 
-function setMinutes(time_to_format) {
-  while (time_to_format.remaining_seconds > 59) {
-    time_to_format.remaining_seconds -= 60;
-    time_to_format.minutes++;
-  }
-}
-
-function setRemainingSeconds(time_to_format) {
-  if (time_to_format.remaining_seconds < 10) {
-    time_to_format.remaining_seconds = '0' + time_to_format.remaining_seconds;
-  }
-}
-
 function format_time(time) {
   var time_to_format = {
     minutes: 0,
@@ -65,8 +52,7 @@ function format_time(time) {
   setMinutes(time_to_format);
   setRemainingSeconds(time_to_format);
 
-  var formatted = time_to_format.minutes + ':'
-        + time_to_format.remaining_seconds;
+  var formatted = formatTime(time_to_format);
 
   return formatted;
 };
@@ -123,3 +109,23 @@ function setEndDragging(rangeBlock, timeMarker, timeText, range_rect) {
 
   group.drag(onMove, onStart, onEnd);
 };
+
+// Helperfunctions
+function setMinutes(time_to_format) {
+  while (time_to_format.remaining_seconds > 59) {
+    time_to_format.remaining_seconds -= 60;
+    time_to_format.minutes++;
+  }
+}
+
+function setRemainingSeconds(time_to_format) {
+  if (time_to_format.remaining_seconds < 10) {
+    time_to_format.remaining_seconds = '0' + time_to_format.remaining_seconds;
+  }
+}
+
+function formatTime(time_to_format) {
+  var formatted = time_to_format.minutes + ':'
+        + time_to_format.remaining_seconds;
+  return formatted;
+}
