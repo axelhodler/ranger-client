@@ -1,5 +1,5 @@
 Ember.Handlebars.helper('draw_range', function(currentMedia) {
-  $('#range_diagram').css({"heigth":"50px"});
+  $('#range_diagram').css({"height":"75px"});
   var range_block = Raphael("range_diagram");
   // regular rectangle x,y,width,height,corner-rounded
   var mainPart = range_block.rect(0, 0, 500, 50, 10);
