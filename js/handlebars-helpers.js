@@ -75,6 +75,7 @@ function setStartDragging(rangeBlock, timeMarker, timeText, range_rect) {
   var onEnd = function () {
     var myset = this.data("myset");
     myset.data("mytrans", this.transform());
+    $('#user_start_time').val(timeText.attr("text"));
   };
 
   group.drag(onMove, onStart, onEnd);
@@ -101,6 +102,7 @@ function setEndDragging(rangeBlock, timeMarker, timeText, range_rect) {
   var onEnd = function () {
     var myset = this.data("myset");
     myset.data("mytrans", this.transform());
+    $('#user_end_time').val(timeText.attr("text"));
   };
 
   group.drag(onMove, onStart, onEnd);

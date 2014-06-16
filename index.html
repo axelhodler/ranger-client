@@ -69,14 +69,33 @@
     </script>
 
     <script type="text/x-handlebars" id="media">
-      <h1>Media</h1>
-      <ul>
-        <li>{{ url }}</li>
-        <li>{{ format_time avgStartTime }}</li>
-        <li>{{ format_time avgEndTime }}</li>
-        <li>{{ choicesByUsers }}</li>
-      </ul>
-      {{ draw_range this }}
+      <div class="col-md-8">
+        <h1>Media</h1>
+        <ul>
+          <li>{{ url }}</li>
+          <li>{{ format_time avgStartTime }}</li>
+          <li>{{ format_time avgEndTime }}</li>
+          <li>{{ choicesByUsers }}</li>
+        </ul>
+        {{ draw_range this }}
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="user_start_time">Starttime:</label>
+                <input id="user_start_time" type="text" class="form-control" placeholder="Start">
+              </div>
+              <div class="form-group">
+                <label for="user_end_time">Endtime:</label>
+                <input id="user_end_time" type="text" class="form-control" placeholder="End">
+              </div>
+              <button type="submit" id="save_range" class="btn btn-default">Save range</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </script>
 
     <div class="container" id="range_diagram"></div>
