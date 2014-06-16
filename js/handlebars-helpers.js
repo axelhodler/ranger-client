@@ -2,36 +2,30 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
   $('#range_diagram').css({"height":"75px"});
   var range_block = Raphael("range_diagram");
   // regular rectangle x,y,width,height,corner-rounded
-  var mainPart = range_block.rect(0, 0, 500, 50, 10);
-  mainPart.attr("fill", "#0f0");
+  var mainPart = range_block.rect(0, 0, 500, 50, 10).attr("fill", "#0f0");
 
-  var css = { "font-weight": "bold", "font-size": 16,
+  var textStyle = { "font-weight": "bold", "font-size": 16,
               "font-family": "Arial, Helvetica, sans-serif" };
 
   var avgStartTime = currentMedia.get('avgStartTime');
   var avgEndTime = currentMedia.get('avgEndTime');
 
   var range_rect = range_block.rect(avgStartTime, 0, avgEndTime - avgStartTime,
-                                    50, 0);
-  range_rect.attr("fill","#00f");
+                                    50, 0).attr("fill","#00f");
 
-  // Startstuff
-  var startTime = range_block.rect(avgStartTime, 0, 5, 50, 2);
-  startTime.attr("fill", "#f00");
+  // Rangestart Marker
+  var startTime = range_block.rect(avgStartTime, 0, 5, 50, 2)
+        .attr("fill", "#f00");
   var startText = range_block.text(avgStartTime, 50 + 10,
                                   format_time(avgStartTime));
-  startText.attr(css);
+  startText.attr(textStyle);
 
-  // Endstuff
-  var endTime = range_block.rect(avgEndTime, 0, 5, 50, 2);
-  endTime.attr("fill", "#f00");
+  // Rangeend Marker
+  var endTime = range_block.rect(avgEndTime, 0, 5, 50, 2).attr("fill", "#f00");
   var endText = range_block.text(avgEndTime, 50 + 10, format_time(avgEndTime));
-  endText.attr(css);
+  endText.attr(textStyle);
 
-  // startGroup draggin
   setStartDragging(range_block, startTime, startText, range_rect);
-
-  // endGroup dragging
   setEndDragging(range_block, endTime, endText, range_rect);
 });
 
@@ -64,7 +58,7 @@ function setStartDragging(rangeBlock, timeMarker, timeText, range_rect) {
   var onStart = function (currentX, currentY, e) {
     var myset = this.data("myset");
     myset.data("mytrans", this.transform());
-  }
+  };
 
   var onMove = function (dx, dy) {
     var myset = this.data("myset");
@@ -74,12 +68,12 @@ function setStartDragging(rangeBlock, timeMarker, timeText, range_rect) {
     var right_bound = range_rect.getBBox().x2;
     range_rect.attr("x", mid_marker);
     range_rect.attr("width", right_bound - mid_marker);
-  }
+  };
 
   var onEnd = function () {
     var myset = this.data("myset");
     myset.data("mytrans", this.transform());
-  }
+  };
 
   group.drag(onMove, onStart, onEnd);
 };
@@ -91,7 +85,7 @@ function setEndDragging(rangeBlock, timeMarker, timeText, range_rect) {
   var onStart = function (currentX, currentY, e) {
     var myset = this.data("myset");
     myset.data("mytrans", this.transform());
-  }
+  };
 
   var onMove = function (dx, dy) {
     var myset = this.data("myset");
@@ -100,12 +94,12 @@ function setEndDragging(rangeBlock, timeMarker, timeText, range_rect) {
     var mid_marker = (myset.getBBox().x + myset.getBBox().x2) / 2;
     var left_bound = range_rect.getBBox().x;
     range_rect.attr("width", mid_marker - left_bound);
-  }
+  };
 
   var onEnd = function () {
     var myset = this.data("myset");
     myset.data("mytrans", this.transform());
-  }
+  };
 
   group.drag(onMove, onStart, onEnd);
 };
