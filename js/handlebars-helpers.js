@@ -19,11 +19,13 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
   var startText = range_block.text(avgStartTime, 50 + 10,
                                   format_time(avgStartTime));
   startText.attr(textStyle);
+  startText.node.id = "chosen_start_time";
 
   // Rangeend Marker
   var endTime = range_block.rect(avgEndTime, 0, 5, 50, 2).attr("fill", "#f00");
   var endText = range_block.text(avgEndTime, 50 + 10, format_time(avgEndTime));
   endText.attr(textStyle);
+  endText.node.id = "chosen_end_time";
 
   setStartDragging(range_block, startTime, startText, range_rect);
   setEndDragging(range_block, endTime, endText, range_rect);
