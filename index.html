@@ -63,20 +63,18 @@
       <h1>Medias</h1>
       <ul>
         {{#each model}}
-        <li>{{#link-to 'media' this}}{{ id }}{{/link-to}}</li>
+        <li>{{#link-to 'media' this}}{{ url }}{{/link-to}}</li>
         {{/each}}
       </ul>
     </script>
 
     <script type="text/x-handlebars" id="media">
       <div class="col-md-8">
-        <h1>Media</h1>
-        <ul>
-          <li>{{ url }}</li>
-          <li>{{ format_time avgStartTime }}</li>
-          <li>{{ format_time avgEndTime }}</li>
-          <li>{{ choicesByUsers }}</li>
-        </ul>
+        <h1>{{ url }}</h1>
+          avgStart: {{ format_time avgStartTime }} |
+          avgEnd: {{ format_time avgEndTime }} |
+          choicesByUser: {{ choicesByUsers }}
+
         {{ draw_range this }}
       </div>
       <div class="col-md-4">
