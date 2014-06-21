@@ -23,6 +23,9 @@ App.MediaRoute = Ember.Route.extend({
   }
 });
 
+// Otherwise it would check the /medium route
+Ember.Inflector.inflector.irregular('media', 'media');
+
 App.ApplicationAdapter = DS.RESTAdapter.extend({
   host: 'http://localhost:1337'
 });
