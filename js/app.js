@@ -3,31 +3,30 @@ var App = Ember.Application.create({
   LOG_TRANSITIONS_INTERNAL: true
 });
 
+Ember.Inflector.inflector.uncountable('media');
+
 App.Router.map(function() {
-  this.resource('medias', { path: '/' });
-  this.resource('media', { path: ':media_id' });
+  this.resource('media', { path: '/' });
+  this.resource('medium', { path: ':medium_id' });
 });
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    this.transitionTo('medias');
+    this.transitionTo('media');
   }
 });
 
-App.MediasRoute = Ember.Route.extend({
+App.MediaRoute = Ember.Route.extend({
   model: function() {
     return this.store.find('media');
   }
 });
 
-App.MediaRoute = Ember.Route.extend({
+App.MediumRoute = Ember.Route.extend({
   model: function(params) {
-    return this.store.find('media', params.media_id);
+    return this.store.find('media', params.medium_id);
   }
 });
-
-// Otherwise it would check the /medium route
-Ember.Inflector.inflector.irregular('media', 'media');
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
   host: 'http://localhost:1337'
