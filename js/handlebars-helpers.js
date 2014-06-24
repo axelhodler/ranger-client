@@ -7,8 +7,8 @@ Ember.Handlebars.helper('draw_range', function(currentMedia) {
   var textStyle = { "font-weight": "bold", "font-size": 16,
               "font-family": "Arial, Helvetica, sans-serif" };
 
-  var avgStartTime = currentMedia.get('avgStartTime');
-  var avgEndTime = currentMedia.get('avgEndTime');
+  var avgStartTime = currentMedia.get('startTime');
+  var avgEndTime = currentMedia.get('endTime');
 
   var range_rect = range_block.rect(avgStartTime, 0, avgEndTime - avgStartTime,
                                     50, 0).attr("fill","#00f");

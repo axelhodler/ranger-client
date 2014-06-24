@@ -24,7 +24,10 @@ App.MediaRoute = Ember.Route.extend({
 
 App.MediumRoute = Ember.Route.extend({
   model: function(params) {
-    return this.store.find('media', params.medium_id);
+    return Ember.RSVP.hash({
+      medium: this.store.find('media', params.medium_id),
+      range: this.store.find('range', params.medium_id)
+    });
   }
 });
 
@@ -35,6 +38,12 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 App.Media = DS.Model.extend({
   _id: DS.attr('string'),
   url: DS.attr('string')
+});
+
+App.Range = DS.Model.extend({
+  _id: DS.attr('string'),
+  startTime: DS.attr('number'),
+  endTime: DS.attr('number')
 });
 
 // deal with the MongoDB ObjectId named "_id"

@@ -70,8 +70,12 @@
 
     <script type="text/x-handlebars" id="medium">
       <div class="col-md-8">
-        <h1>{{ url }}</h1>
-        id : {{ id }} |
+        <h1>{{ medium.url }}</h1>
+        id : {{ medium.id }} |
+        avgStart: {{ format_time range.startTime }} |
+        avgEnd: {{ format_time range.endTime }} |
+
+        {{ draw_range range }}
       </div>
       <div class="col-md-4">
         <div class="panel panel-default">
