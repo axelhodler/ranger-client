@@ -23,11 +23,12 @@ App.MediaRoute = Ember.Route.extend({
 });
 
 App.MediumRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    controller.set('content', model);
+    controller.set('range', this.store.find('range', model.id));
+  },
   model: function(params) {
-    return Ember.RSVP.hash({
-      medium: this.store.find('media', params.medium_id),
-      range: this.store.find('range', params.medium_id)
-    });
+    return this.store.find('media', params.medium_id);
   }
 });
 
