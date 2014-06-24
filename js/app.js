@@ -34,10 +34,7 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 
 App.Media = DS.Model.extend({
   _id: DS.attr('string'),
-  url: DS.attr('string'),
-  avgStartTime: DS.attr('number'),
-  avgEndTime: DS.attr('number'),
-  choicesByUsers: DS.attr('number')
+  url: DS.attr('string')
 });
 
 // deal with the MongoDB ObjectId named "_id"
